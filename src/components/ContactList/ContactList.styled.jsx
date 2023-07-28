@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const ContainerList = styled.ul`
     color: rgb(29 107 125);
-    box-shadow: 0px 0px 1px 3px rgba(146, 207, 235, 0.75);
+    box-shadow: 0px 0px 1px 3px rgba(31, 82, 106, 0.75);
     padding: 15px 10px;
 `;
 
@@ -14,7 +14,7 @@ export const Item = styled.li`
     font-weight: 400;
     font-size: 16px;
     margin-bottom: 5px;
-    border-bottom: 1px solid rgba(146, 207, 235, 0.75);
+    border-bottom: 1px solid rgba(31, 82, 106, 0.75);
 `;
 
 export const Btn = styled.button`
@@ -27,7 +27,7 @@ export const Btn = styled.button`
     cursor: pointer;
     :hover {
         color: rgb(179, 237, 250);
-        background-color: rgb(69, 243, 185);
+        background-color: rgb(191, 34, 34);
         box-shadow: 0px 0px 5px 2px rgb(125, 177, 201);
     }
 `;

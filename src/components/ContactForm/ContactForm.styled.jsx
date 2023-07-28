@@ -25,28 +25,28 @@ export const Input = styled(Field)`
 `;
 
 export const Btn = styled.button`
-  padding: 5px 20px;
-  font-weight: 700;
-  font-size: 18px;
-  color: rgb(44 127 146);
-  border-radius: 5px;
-  border: none;
-  background-color: rgba(150, 248, 230, 0.8);
-  box-shadow: 0px 0px 1px 3px rgba(146, 207, 235, 0.75);
-  cursor: pointer;
-  :hover {
-    color: rgb(179, 237, 250);
-    background-color: rgb(69, 243, 185);
-    box-shadow: 0px 0px 5px 5px rgb(125, 177, 201);
-  }
+    padding: 5px 20px;
+    font-weight: 700;
+    font-size: 18px;
+    color: rgb(44 127 146);
+    border-radius: 5px;
+    border: none;
+    background-color: rgba(150, 248, 230, 0.8);
+    box-shadow: 0px 0px 1px 3px rgba(146, 207, 235, 0.75);
+    cursor: pointer;
+    :hover {
+        color: rgb(179, 237, 250);
+        background-color: rgb(18, 93, 68);
+        box-shadow: 0px 0px 5px 5px rgb(125, 177, 201);
+    }
 `;
 
 export const ErrorInfo = styled.div`
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  color: rgb(233, 238, 213);
-  background-color: rgb(113, 147, 243);
-  padding: 10px 20px;
-  border-radius: 5px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: rgb(233, 238, 213);
+    background-color: rgb(113, 147, 243);
+    padding: 10px 20px;
+    border-radius: 5px;
 `;

@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const FilterContainer = styled.div`
     color: rgb(29 107 125);
-    box-shadow: 0px 0px 1px 3px rgba(146, 207, 235, 0.75);
+    box-shadow: 0px 0px 1px 3px rgba(31, 82, 106, 0.75);
     padding: 15px 10px;
     text-align: center;
     margin-bottom: 25px;
