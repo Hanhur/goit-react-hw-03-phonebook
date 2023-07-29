@@ -1,70 +1,90 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
+import { GlobalStyle } from './GlobalStyle';
+import { Layout } from './Layout/Layout';
+import { ContactList } from './ContactList/ContactList';
 import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
-import { ContactList } from './ContactList/ContactList';
-import { Container, Title } from './App.styled';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import initialContacts from './contacts.json';
+
+const notificationMassege = 'is already in contacts!';
+const notificationOptions = {
+    position: 'top-center',
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'dark',
+};
 
 export class App extends Component {
     state = {
-        contacts: [
-            { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-            { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-            { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-            { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-        ],
+        contacts: [],
         filter: '',
     };
 
-    handleFormSubmit = newContact => {
+    componentDidMount() 
+    {
+        const savedContacts = localStorage.getItem('contacts');
+        if (savedContacts !== null) 
+        {
+            const parsedContacts = JSON.parse(savedContacts);
+            this.setState({ contacts: parsedContacts });
+            return;
+        }
+        this.setState({ contacts: initialContacts });
+    }
 
-        const сontactValue = newContact.name.toLowerCase();
-        const duplicateСontact = this.state.contacts.find(
-            contact => contact.name.toLowerCase() === сontactValue
-        );
+    componentDidUpdate(prevProps, prevState) 
+    {
+        if (this.state.contacts !== prevState.contacts) 
+        {
+            localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+        }
+    }
 
-        duplicateСontact
-            ? alert(`${newContact.name} is already in contacts.`)
-            : this.setState(({ contacts }) => ({
-                contacts: [newContact, ...contacts],
-            }));
+    addContact = newContact => {
+        if (this.state.contacts.some(contact => contact.name.toLocaleLowerCase() === newContact.name.toLocaleLowerCase())) 
+        {
+            toast.error(
+                `${newContact.name} ${notificationMassege}`,
+                notificationOptions
+            );
+            return;
+        }
+        this.setState(prevState => ({contacts: [...prevState.contacts, newContact]}));
     };
 
     deleteContact = contactId => {
-        this.setState(prevState => ({
-            contacts: prevState.contacts.filter(contact => contact.id !== contactId),
-        }));
+        this.setState(prevState => ({contacts: prevState.contacts.filter(contact => contact.id !== contactId)}));
     };
 
-    onChange = e => {
+    changeFilter = e => {
         this.setState({ filter: e.currentTarget.value });
-    };
-
-    findContact = () => {
-        const { filter, contacts } = this.state;
-        const filterValue = filter.toLowerCase();
-
-        return contacts.filter(contact =>
-            contact.name.toLowerCase().includes(filterValue)
-        );
     };
 
     render() 
     {
-        const contactsList = this.findContact();
+        const normalizeFilter = this.state.filter.toLocaleLowerCase();
+        const visibleContacts = this.state.contacts
+            .filter(contact => contact.name.toLocaleLowerCase().includes(normalizeFilter))
+            .sort((firstName, secondName) => firstName.name.localeCompare(secondName.name));
+
         return (
-            <Container>
-                <Title>Phonebook</Title>
-                <ContactForm onSubmit={this.handleFormSubmit} />
+            <Layout>
+                <h1>Phonebook</h1>
+                <ContactForm onSave={this.addContact} />
 
-                <Title>Contacts</Title>
-                <Filter onChange={this.onChange} value={this.state.filter} />
+                <h2>Contacts</h2>
+                <Filter value={this.state.filter} onSearch={this.changeFilter} />
+                <ContactList items={visibleContacts} onDelete={this.deleteContact} />
 
-                <ContactList
-                    contacts={contactsList}
-                    deleteContact={this.deleteContact}
-                    onChange={this.onChange}
-                />
-            </Container>
-        );
+                <ToastContainer />
+                <GlobalStyle />
+            </Layout>
+        )
     }
 }

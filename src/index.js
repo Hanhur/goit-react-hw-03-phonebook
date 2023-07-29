@@ -1,10 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { App } from 'components/App';
-import './index.css';
+import { ThemeProvider } from 'styled-components';
+
+const theme = {
+    colors: {
+        main: '#0b100e',
+        bgc: '#87839c',
+        accentLight: '#9199be',
+        accentDark: '#54678f',
+        error: '#720017',
+    },
+};
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <App />
+        <ThemeProvider theme={theme}>
+            <App />
+        </ThemeProvider>
     </React.StrictMode>
 );

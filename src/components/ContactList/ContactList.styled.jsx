@@ -1,33 +1,35 @@
-import styled from '@emotion/styled';
+import styled from 'styled-components';
 
-export const ContainerList = styled.ul`
-    color: rgb(29 107 125);
-    box-shadow: 0px 0px 1px 3px rgba(31, 82, 106, 0.75);
-    padding: 15px 10px;
+export const List = styled.ul`
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 10px;
 `;
 
 export const Item = styled.li`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px 10px;
-    font-weight: 400;
-    font-size: 16px;
-    margin-bottom: 5px;
-    border-bottom: 1px solid rgba(31, 82, 106, 0.75);
+    gap: 16px;
 `;
 
-export const Btn = styled.button`
-    padding: 5px 20px;
-    color: rgb(44 127 146);
+export const ListBtnDel = styled.button`
+    width: 30px;
+    padding: 3px;
     border-radius: 5px;
     border: none;
-    background-color: rgba(150, 248, 230, 0.8);
-    box-shadow: 0px 0px 5px 2px rgba(146, 207, 235, 0.75);
-    cursor: pointer;
-    :hover {
-        color: rgb(179, 237, 250);
-        background-color: rgb(191, 34, 34);
-        box-shadow: 0px 0px 5px 2px rgb(125, 177, 201);
+    background-color: ${p => p.theme.colors.accentLight};
+    transition: all 0.2s ease-in-out;
+    :hover,
+    :focus {
+        background-color: ${p => p.theme.colors.accentDark};
+        color: #fff;
+        box-shadow: -2px -2px 5px #fff,
+        2px 2px 5px ${p => p.theme.colors.accentDark};
+        svg {
+        fill: #fff;
+        stroke: #fff;
+        }
     }
 `;

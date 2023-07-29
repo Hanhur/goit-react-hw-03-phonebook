@@ -1,52 +1,70 @@
-import styled from '@emotion/styled';
-import { Form, Field } from 'formik';
+import styled from 'styled-components';
+import {
+    Form as FormikForm,
+    ErrorMessage as FormikErrorMessage,
+    Field,
+} from 'formik';
 
-export const FormContainer = styled(Form)`
-    color: #0b118f;
-    padding: 15px 10px;
-    text-align: center;
-    margin-bottom: 25px;
+export const Form = styled(FormikForm)`
+    width: 390px;
+    padding: 20px;
+    margin-bottom: 30px;
+    border: 1px solid ${props => props.theme.colors.accentDark};
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: -1px -1px 5px #fff, 1px 1px 5px ${p => p.theme.colors.accentDark};
 `;
 
-export const Label = styled.label`
-    display: block;
-    font-weight: 700;
-    font-size: 18px;
+export const FormField = styled.label`
+    display: flex;
+    flex-direction: column;
+`;
+
+export const FieldInput = styled(Field)`
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: inset 1px 1px 3px ${props => props.theme.colors.accentLight},
+        inset -1px -1px 5px ${props => props.theme.colors.accentLight};
+`;
+
+export const LabelWrapper = styled.div`
+    display: flex;
+    gap: 8px;
+    margin-left: 8px;
     margin-bottom: 5px;
 `;
 
-export const Input = styled(Field)`
-    margin-bottom: 10px;
-    padding: 5px 10px;
-    font-weight: 400;
-    font-size: 14px;
-    border-radius: 5px;
-    border: none;
+export const ErrorMessage = styled(FormikErrorMessage)`
+    font-size: 12px;
+    font-style: italic;
+    color: ${props => props.theme.colors.error};
 `;
 
-export const Btn = styled.button`
-    padding: 5px 20px;
-    font-weight: 700;
-    font-size: 18px;
-    color: rgb(44 127 146);
+export const FormBtnAdd = styled.button`
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 5px;
+    margin-left: auto;
+    margin-right: auto;
     border-radius: 5px;
     border: none;
-    background-color: rgba(150, 248, 230, 0.8);
-    box-shadow: 0px 0px 1px 3px rgba(146, 207, 235, 0.75);
-    cursor: pointer;
-    :hover {
-        color: rgb(179, 237, 250);
-        background-color: rgb(18, 93, 68);
-        box-shadow: 0px 0px 5px 5px rgb(125, 177, 201);
+    background-color: ${p => p.theme.colors.accentLight};
+    transition: all 0.2s ease-in-out;
+    :hover,
+    :focus {
+        background-color: ${p => p.theme.colors.accentDark};
+        color: #fff;
+        box-shadow: -2px -2px 5px #fff,
+        2px 2px 5px ${p => p.theme.colors.accentDark};
+        svg {
+        fill: #fff;
+        stroke: #fff;
+        }
     }
-`;
-
-export const ErrorInfo = styled.div`
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    color: rgb(233, 238, 213);
-    background-color: rgb(113, 147, 243);
-    padding: 10px 20px;
-    border-radius: 5px;
 `;

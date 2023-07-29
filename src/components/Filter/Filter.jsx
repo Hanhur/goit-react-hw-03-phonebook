@@ -1,14 +1,23 @@
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Label, Input, FilterContainer } from './Filter.styled';
+import { MdPersonSearch } from 'react-icons/md';
+import { Input, SearchField } from './Filter.styled';
 
-export const Filter = ({ onChange, value }) => (
-    <FilterContainer>
-        <Label htmlFor="filter">Find contacts by name</Label>
-        <Input type="text" name="filter" onChange={onChange} value={value} />
-    </FilterContainer>
-);
+export const Filter = ({ value, onSearch }) => {
+    return (
+        <SearchField>
+            <MdPersonSearch size="22" />
+            <Input
+                type="text"
+                name="filter"
+                value={value}
+                onChange={onSearch}
+                placeholder="Find contacts by name" />
+        </SearchField>
+    );
+};
 
 Filter.propTypes = {
     value: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
+    onSearch: PropTypes.func.isRequired,
 };

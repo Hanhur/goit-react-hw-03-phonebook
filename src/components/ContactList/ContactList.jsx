@@ -1,27 +1,29 @@
+import React from 'react';
 import PropTypes from 'prop-types';
-import { ContainerList, Item, Btn } from './ContactList.styled';
+import { FaUserMinus } from 'react-icons/fa'
+import { Item, List, ListBtnDel } from './ContactList.styled';
 
-export const ContactList = ({ contacts, deleteContact }) => (
-    <ContainerList>
-        {contacts.map(contact => {
-            return (
-                <Item key={contact.id}>
-                    <p>{contact.name}</p>
-                    <span>{contact.number}</span>
-                    <Btn type="submit" onClick={() => deleteContact(contact.id)}>Delete</Btn>
+export const ContactList = ({ items, onDelete }) => {
+    return (
+        <List>
+            {items.map(item => (
+                <Item key={item.id}>
+                    <span>{item.name}</span>
+                    <span>{item.number}</span>
+                    <ListBtnDel onClick={() => onDelete(item.id)}><FaUserMinus size="16" /></ListBtnDel>
                 </Item>
-            );
-        })}
-    </ContainerList>
-);
+            ))}
+        </List>
+    );
+};
 
 ContactList.propTypes = {
-    deleteContact: PropTypes.func.isRequired,
-    contacts: PropTypes.arrayOf(
+    items: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.string.isRequired,
             name: PropTypes.string.isRequired,
             number: PropTypes.string.isRequired,
         })
     ).isRequired,
+    onDelete: PropTypes.func.isRequired,
 };
